@@ -1,0 +1,21 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Leap_Boilerplate\scripts\LeapManager.cs">
+    <Files>
+      <File FileName="Assets\Leap_Boilerplate\scripts\LeapManager.cs" Line="254" Column="1" />
+      <File FileName="Assets\MarchingMenus\Scripts\LevelBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets\MarchingMenus\Scripts\MenuActivatorBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets\MarchingMenus\Resources\Button Parts\ButtonBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets\Leap_Boilerplate\scripts\LeapManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Leap_Boilerplate\scripts_for_example_scenes\FingerCountChecker.cs" Line="1" Column="1" />
+      <File FileName="Assets\Leap_Boilerplate\scripts_for_example_scenes\HandController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ButtonBehav.cs" Line="83" Column="28" />
+      <File FileName="Assets\Scripts\FingerRenderer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\tGUI.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
