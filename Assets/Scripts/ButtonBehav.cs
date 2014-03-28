@@ -38,7 +38,7 @@ public class ButtonBehav : MonoBehaviour {
 	void Update () {
 
 		GestureList gestures = _leapManager.currentFrame.Gestures();
-		InteractionBox interactionBox = _leapManager.currentFrame.InteractionBox;
+		//InteractionBox interactionBox = _leapManager.currentFrame.InteractionBox;
 
 		if (gestures.Count > 0) {
 
@@ -47,11 +47,23 @@ public class ButtonBehav : MonoBehaviour {
 				Debug.Log(gesture.Type);
 				switch (gesture.Type) {
 					case Gesture.GestureType.TYPESCREENTAP:
-						ScreenTapGesture screenTap = new ScreenTapGesture(gesture);
-						// Debug.Log("Position: " + screenTap.Position + ", Normalized: " + interactionBox.NormalizePoint(screenTap.Position));
-						if (containsPoint(screenTap.Position.ToUnityTranslated())) 
+						ScreenTapGesture screentap = new ScreenTapGesture(gesture);
+						// Debug.Log("Position: " + screentap.Position + ", Normalized: " + interactionBox.NormalizePoint(screentap.Position));
+						if (containsPoint(screentap.Position.ToUnityTranslated())) 
 							changeState(State.SELECTED);
-						// Debug.Log("Position: " + screenTap.Position + ", Direction: " + screenTap.Direction);
+						// Debug.Log("Position: " + screentap.Position + ", Direction: " + screentap.Direction);
+						break;
+					case Gesture.GestureType.TYPECIRCLE:
+						CircleGesture circle = new CircleGesture(gesture);
+						// Debug.Log("Position: " + screentap.Position + ", Normalized: " + interactionBox.NormalizePoint(screentap.Position));
+						if (containsPoint(circle.Center.ToUnityTranslated())) 
+							changeState(State.SELECTED);
+						// Debug.Log("Position: " + screentap.Position + ", Direction: " + screentap.Direction);
+						break;
+					case Gesture.GestureType.TYPEKEYTAP:
+						KeyTapGesture keytap = new KeyTapGesture(gesture);
+						if (containsPoint(keytap.Position.ToUnityTranslated())) 
+							changeState(State.SELECTED);
 						break;
 					default:
 						Debug.Log("Unknown gesture type.");
@@ -85,12 +97,14 @@ public class ButtonBehav : MonoBehaviour {
 			gameObject.transform.GetChild(0).position.y-gameObject.transform.GetChild(0).renderer.bounds.size.y/2, 
 			gameObject.transform.GetChild(0).renderer.bounds.size.x, 
 			gameObject.transform.GetChild(0).renderer.bounds.size.y);
+		// Debug.Log(box);
+		/*
 		Debug.Log (	point.x <= box.x + box.width && point.x >= box.x &&
 		           point.y >= box.y + (-1*(box.height)) && point.y <= box.y &&
 		           point.z > 0 );
-		if(	point.x <= box.x + box.width && point.x >= box.x &&
-		   point.y >= box.y + (-1*(box.height)) && point.y <= box.y &&
-		   point.z > 0 )
+		*/
+		if ( point.x <= box.x + box.width && point.x >= box.x &&
+		   point.y >= box.y + (-1*(box.height)) && point.y <= box.y )
 		{
 			return true;
 		}
@@ -118,7 +132,7 @@ public class ButtonBehav : MonoBehaviour {
 					break;
 				default:
 					Debug.LogError("Unrecognized State passed to changeState(State newState)");
-					return;
+					//return;
 					break;
 			}
 

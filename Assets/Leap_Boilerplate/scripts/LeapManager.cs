@@ -188,8 +188,9 @@ public class LeapManager : MonoBehaviour {
 		{
 			_mainCam = (GameObject.FindGameObjectWithTag("MainCamera") as GameObject).GetComponent(typeof(Camera)) as Camera;
 		}
-		//leapController.EnableGesture(Gesture.GestureType.TYPECIRCLE);
-		//leapController.EnableGesture(Gesture.GestureType.TYPEKEYTAP);
+
+		leapController.EnableGesture(Gesture.GestureType.TYPECIRCLE);
+		leapController.EnableGesture(Gesture.GestureType.TYPEKEYTAP);
 		leapController.EnableGesture(Gesture.GestureType.TYPESCREENTAP);
 		//leapController.EnableGesture(Gesture.GestureType.TYPESWIPE);
 		Debug.Log(_mainCam);
@@ -207,13 +208,15 @@ public class LeapManager : MonoBehaviour {
 
 		if(primeHand.IsValid)
 		{
-			primeFinger = pointingFinger(primeHand);
+			//primeFinger = pointingFinger(primeHand);
+			primeFinger = _currentFrame.Fingers.Frontmost;
 
 			if(primeFinger.IsValid) 
 			{ 
 				_pointerAvailible = true; 
 
-				_pointerPositionWorld = primeFinger.TipPosition.ToUnityTranslated();
+				//_pointerPositionWorld = primeFinger.TipPosition.ToUnityTranslated();
+				_pointerPositionWorld = primeFinger.StabilizedTipPosition.ToUnityTranslated();
 				//TODO: Needs Improvement: Doesn't work if camera is not looking at world origin.
 				_pointerPositionScreen = _mainCam.WorldToScreenPoint(_pointerPositionWorld);
 				_pointerPositionScreenToWorld = _mainCam.ScreenToWorldPoint(new Vector3(pointerPositionScreen.x,
