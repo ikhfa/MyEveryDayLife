@@ -23,8 +23,9 @@ public class FingerRenderer : MonoBehaviour {
 		}*/
 		if(_leapManager.pointerAvailible) {
 			finger.SetActive(true);
-			finger.transform.localPosition = _leapManager.pointerPositionWorld;
-
+			finger.transform.localPosition = new Vector3(_leapManager.pointerPositionWorld.x,_leapManager.pointerPositionWorld.y,finger.transform.localPosition.z);
+			if(_leapManager.pointerPositionWorld.z < 0)
+			finger.transform.localScale = new Vector3(_leapManager.pointerPositionWorld.z,_leapManager.pointerPositionWorld.z,5);
 		}
 		else
 		{

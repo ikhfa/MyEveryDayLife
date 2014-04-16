@@ -122,7 +122,7 @@ public class LeapManager : MonoBehaviour {
 	 * Returns the most likely finger to be pointing on the given hand. 
 	 * Returns Finger.Invalid if no such finger exists.
 	 */
-	public static Finger pointingFinger(Hand hand)
+	public static Finger pointingFigner(Hand hand)
 	{
 		Finger forwardFinger = Finger.Invalid;
 		ArrayList forwardFingers = forwardFacingFingers(hand);
@@ -164,6 +164,10 @@ public class LeapManager : MonoBehaviour {
 		return forwardFingers;
 	}
 
+	public static Vector palmDirection(Hand hand) {
+		return hand.PalmNormal;
+	}
+
 	/*
 	 * Returns whether or not the given hand is open.
 	 */
@@ -188,11 +192,6 @@ public class LeapManager : MonoBehaviour {
 		{
 			_mainCam = (GameObject.FindGameObjectWithTag("MainCamera") as GameObject).GetComponent(typeof(Camera)) as Camera;
 		}
-
-		leapController.EnableGesture(Gesture.GestureType.TYPECIRCLE);
-		leapController.EnableGesture(Gesture.GestureType.TYPEKEYTAP);
-		leapController.EnableGesture(Gesture.GestureType.TYPESCREENTAP);
-		//leapController.EnableGesture(Gesture.GestureType.TYPESWIPE);
 		Debug.Log(_mainCam);
 	}
 	
@@ -208,15 +207,13 @@ public class LeapManager : MonoBehaviour {
 
 		if(primeHand.IsValid)
 		{
-			//primeFinger = pointingFinger(primeHand);
-			primeFinger = _currentFrame.Fingers.Frontmost;
+			primeFinger = pointingFigner(primeHand);
 
 			if(primeFinger.IsValid) 
 			{ 
 				_pointerAvailible = true; 
 
-				//_pointerPositionWorld = primeFinger.TipPosition.ToUnityTranslated();
-				_pointerPositionWorld = primeFinger.StabilizedTipPosition.ToUnityTranslated();
+				_pointerPositionWorld = primeFinger.TipPosition.ToUnityTranslated();
 				//TODO: Needs Improvement: Doesn't work if camera is not looking at world origin.
 				_pointerPositionScreen = _mainCam.WorldToScreenPoint(_pointerPositionWorld);
 				_pointerPositionScreenToWorld = _mainCam.ScreenToWorldPoint(new Vector3(pointerPositionScreen.x,
